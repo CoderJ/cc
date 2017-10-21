@@ -21,7 +21,7 @@ let main = async function () {
         openAPage('https://www.baidu.com/');
     }
 }
-main();
+//main();
 app.use(bodyparser);
 app.use(json());
 
