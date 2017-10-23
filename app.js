@@ -4,15 +4,22 @@ const app = new Koa();
 const json = require('koa-json');
 const bodyparser = require('koa-bodyparser')();
 const router = require('koa-router')();
+const onerror = require('koa-onerror');
 
 
 const Page = require(__base + 'lib/browser.js');
 
 let openAPage = async (url) => {
-    let page = new Page();
-    await page.init();    
-    let content = await page.getContent(url);
-    await page.close();
+    let content;
+    try {
+        let page = new Page();
+        await page.init();
+        content = await page.getContent(url);
+        await page.close();
+    } catch (e) { 
+        console.log(e);
+    }
+
     return content;
 };
 
@@ -24,6 +31,7 @@ let main = async function () {
 //main();
 app.use(bodyparser);
 app.use(json());
+app.use(onError());
 
 
 router.get(/.*/, async(ctx, next) => {
