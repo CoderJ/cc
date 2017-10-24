@@ -6,7 +6,7 @@ const bodyparser = require('koa-bodyparser')();
 const router = require('koa-router')();
 const onError = require('koa-onerror');
 
-
+onError(app);
 const Page = require(__base + 'lib/browser.js');
 
 let openAPage = async (url) => {
@@ -31,8 +31,6 @@ let main = async function () {
 //main();
 app.use(bodyparser);
 app.use(json());
-app.use(onError());
-
 
 router.get(/.*/, async(ctx, next) => {
     let url = ctx.url.replace(/^\//, '');
