@@ -11,20 +11,16 @@ const Page = require(__base + 'lib/browser.js');
 
 let openAPage = async (url) => {
     let content;
-    try {
-        let page = new Page();
-        await page.init();
-        content = await page.getContent(url);
-        await page.close();
-    } catch (e) { 
-        console.log(e);
-    }
+    let page = new Page();
+    await page.init();
+    content = await page.getContent(url);
+    await page.close();
 
     return content;
 };
 
-let main = async function () { 
-    for (let i = 0; i < 100; i++) { 
+let main = async function () {
+    for (let i = 0; i < 100; i++) {
         openAPage('https://www.baidu.com/');
     }
 }
@@ -32,7 +28,7 @@ let main = async function () {
 app.use(bodyparser);
 app.use(json());
 
-router.get(/.*/, async(ctx, next) => {
+router.get(/.*/, async (ctx, next) => {
     let url = ctx.url.replace(/^\//, '');
     if (!/^https*\:\/\//.test(url)) {
         ctx.status = 404;
@@ -40,7 +36,13 @@ router.get(/.*/, async(ctx, next) => {
         return false;
     }
     let content = await openAPage(url);
-    ctx.body = content;
+    if (content) {
+        ctx.body = content;
+    } else { 
+        ctx.status = 404;
+        ctx.body = '';        
+    }
+    return '';
 });
 
 
