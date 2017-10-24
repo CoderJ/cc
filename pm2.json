@@ -1,0 +1,14 @@
+{
+    apps: [
+        {
+        name: "cc",
+        script: './bin/www',
+        exec_mode: 'fork',
+        watch: false,
+        max_memory_restart: "4G",
+        log_date_format: "YYYY-MM-DD HH:mm:ss Z",
+        max_restarts: 10,
+        restart_delay: 10000
+        }
+    ]
+}
