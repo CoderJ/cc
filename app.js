@@ -4,7 +4,7 @@ const app = new Koa();
 const json = require('koa-json');
 const bodyparser = require('koa-bodyparser')();
 const router = require('koa-router')();
-const onerror = require('koa-onerror');
+const onError = require('koa-onerror');
 
 
 const Page = require(__base + 'lib/browser.js');
