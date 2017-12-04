@@ -2,7 +2,8 @@ const fs = require('fs');
 module.exports = {
     DEBUG: (process.env.NODE_ENV != "production"),
     MAXTABNUMBER: 8,
-    PORT : 8050,
+    PORT: 8050,
+    AUTORESTART : 86400,
     USERAGENTS: {
         DESKTOP: fs.readFileSync(__base + 'const/userAgents/desktop','utf8').split('\n'),
         MOBILE: fs.readFileSync(__base + 'const/userAgents/mobile','utf8').split('\n')

@@ -5,6 +5,7 @@ const json = require('koa-json');
 const bodyparser = require('koa-bodyparser')();
 const router = require('koa-router')();
 const onError = require('koa-onerror');
+const CONSTANTS = require(__base + 'const/index');
 
 onError(app);
 const Page = require(__base + 'lib/browser.js');
@@ -48,4 +49,9 @@ router.get(/.*/, async (ctx, next) => {
 
 app.use(router.routes(), router.allowedMethods());
 
+if (CONSTANTS.AUTORESTART) { 
+    setTimeout(function(){ 
+        process.exit();
+    },CONSTANTS.AUTORESTART * 1000)
+}
 module.exports = app;
