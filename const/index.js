@@ -3,7 +3,9 @@ module.exports = {
     DEBUG: (process.env.NODE_ENV != "production"),
     MAXTABNUMBER: 8,
     PORT: 8050,
-    AUTORESTART : 86400,
+    AUTORESTART: 86400,
+    loadTimeout: 25000,
+    loadDOMTimeout : 25000,
     USERAGENTS: {
         DESKTOP: fs.readFileSync(__base + 'const/userAgents/desktop','utf8').split('\n'),
         MOBILE: fs.readFileSync(__base + 'const/userAgents/mobile','utf8').split('\n')
